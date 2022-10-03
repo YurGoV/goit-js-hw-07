@@ -2,46 +2,27 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 // console.log(galleryItems);
 
-// =======
-// Створюємо розмітку
-
-const galleryCard = (flower) => {
-    // кріейтемо "а"-шку
-    const linkOfPicture = document.createElement('a');
-    linkOfPicture.classList.add('gallery__link');
-    linkOfPicture.href = flower.original;
-
-    // кріейтемо імг-шку
-    const imgOfPicture = document.createElement('img');
-    imgOfPicture.classList.add('gallery__image');
-    imgOfPicture.src = flower.preview;
-    imgOfPicture.alt = flower.description;
-    imgOfPicture.setAttribute('data-source', flower.original);
-
-    // console.log(flower.preview);
-
-    // вкладаємо імаджі у посилання
-    linkOfPicture.append(imgOfPicture);    
-    // console.log(aOfPicture);
-
-    return linkOfPicture;
-    // console.log(imgOfPicture);
-};
-
-// мапаємо масив у галерею
-const galleryCards = galleryItems.map(galleryCard);
-// console.log(galleryCards);
-
+const galleryCards = galleryItems.map((oneCard) => 
+  `<a class="gallery__link" href="${oneCard.original}">
+  <img 
+    class="gallery__image"
+    src="${oneCard.preview}"
+    data-source="${oneCard.original}"
+    alt="${oneCard.description}"
+  />
+</a>`)
+.join("");
 
 // ============
-// Закидуємо розмірку у ДОМ і отримуємо url великого зображення
+// Закидуємо розмітку у ДОМ і отримуємо url великого зображення
 
 // шукаємо дів-ку
 const gallery = document.querySelector('div.gallery')
 // console.log(gallery);
 
 // аппендимо галерею в ДОМ
-gallery.append(...galleryCards);
+// gallery.append(...galleryCards);
+gallery.insertAdjacentHTML('beforeend', galleryCards);
 
 
 // ============
@@ -74,3 +55,36 @@ function onCloseModal(event) {
   }
   // console.log(event.type);//перевіряємо чи знімається слухач з клави
 }
+// =====================
+// РОЗМІТКА ЧЕРЕЗ АППЕНД
+// Створюємо розмітку
+/* 
+const galleryCard = (flower) => {
+    // кріейтемо "а"-шку
+    const linkOfPicture = document.createElement('a');
+    linkOfPicture.classList.add('gallery__link');
+    linkOfPicture.href = flower.original;
+
+    // кріейтемо імг-шку
+    const imgOfPicture = document.createElement('img');
+    imgOfPicture.classList.add('gallery__image');
+    imgOfPicture.src = flower.preview;
+    imgOfPicture.alt = flower.description;
+    imgOfPicture.setAttribute('data-source', flower.original);
+
+    // console.log(flower.preview);
+
+    // вкладаємо імаджі у посилання
+    linkOfPicture.append(imgOfPicture);    
+    // console.log(aOfPicture);
+
+    return linkOfPicture;
+    // console.log(imgOfPicture);
+};
+
+
+// мапаємо масив у галерею
+// const galleryCards = galleryItems.map(galleryCard);
+// console.log(galleryCards);
+
+ */
