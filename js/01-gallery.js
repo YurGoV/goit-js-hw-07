@@ -2,38 +2,33 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 // console.log(galleryItems);
 
-const galleryCards = galleryItems.map((oneCard) => 
-  `<a class="gallery__link" href="${oneCard.original}">
-  <img 
-    class="gallery__image"
-    src="${oneCard.preview}"
-    data-source="${oneCard.original}"
-    alt="${oneCard.description}"
-  />
-</a>`)
+const galleryCards = galleryItems.map(({description, original, preview}) => 
+  `<div class="gallery__item">
+    <a class="gallery__link" href="${original}">
+    <img 
+      class="gallery__image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
+    />
+   </a>
+   </div>`)
 .join("");
 
-// ============
-// Закидуємо розмітку у ДОМ і отримуємо url великого зображення
 
-// шукаємо дів-ку
-const gallery = document.querySelector('div.gallery')
-// console.log(gallery);
-
-// аппендимо галерею в ДОМ
-// gallery.append(...galleryCards);
-gallery.insertAdjacentHTML('beforeend', galleryCards);
+const refGallery = document.querySelector('div.gallery')// шукаємо дів-ку галереї
+// console.log(refGallery);
 
 
-// ============
-// Додаємо слухача на gallery (галарею в цілому), виклик basicLightbox, та прослуховування клави
+refGallery.insertAdjacentHTML('beforeend', galleryCards);//інсертимо галерею в ДОМ
 
-let instance = '';
 
-gallery.addEventListener('click', openModal);
+let instance = '';//ініціалізуємо
 
-function openModal(event) {//
-    event.preventDefault();
+refGallery.addEventListener('click', openModal);//додаємо слухача (на галарею в цілому)
+
+function openModal(event) {
+    event.preventDefault();//не даємо відкриватися імг-шці за замовченням
     const modalSrc = event.target.dataset.source;//отримуємо посилання на поточний src
 
     // викликаємо модалку basic
@@ -51,10 +46,10 @@ function onCloseModal(event) {
   // console.log(event);
   if (event.key === "Escape"){
     instance.close();
-  const modal = document.querySelector('div.basicLightbox')
   }
   // console.log(event.type);//перевіряємо чи знімається слухач з клави
 }
+
 // =====================
 // РОЗМІТКА ЧЕРЕЗ АППЕНД
 // Створюємо розмітку
@@ -86,5 +81,8 @@ const galleryCard = (flower) => {
 // мапаємо масив у галерею
 // const galleryCards = galleryItems.map(galleryCard);
 // console.log(galleryCards);
+
+// аппендимо галерею в ДОМ
+// gallery.append(...galleryCards);
 
  */

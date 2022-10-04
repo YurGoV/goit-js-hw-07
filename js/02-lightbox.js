@@ -3,39 +3,30 @@ import { galleryItems } from './gallery-items.js';
 // console.log(galleryItems);
 
 
-const galleryCards = galleryItems.map((oneCard) => 
-  `<a class="gallery__item" href="${oneCard.original}">
+const galleryCards = galleryItems.map(({description, original, preview}) => 
+  `<a class="gallery__item" href="${original}">
   <img 
     class="gallery__image"
-    src="${oneCard.preview}"
-    alt="${oneCard.description}"
+    src="${preview}"
+    alt="${description}"
   />
 </a>`)
 .join("");
 
 
+const refGallery = document.querySelector('.gallery')// шукаємо дів-ку
+// console.log(refGallery);
 
-// ============ Закидуємо розмірку у ДОМ і отримуємо url великого зображення
+refGallery.insertAdjacentHTML('beforeend', galleryCards)// аджастимо галерею в ДОМ
 
-// шукаємо дів-ку
-const gallery = document.querySelector('.gallery')
-// console.log(gallery);
-
-// інсертимо у ДОМ
-
-// аппендимо галерею в ДОМ
-gallery.insertAdjacentHTML('beforeend', galleryCards)
-
-// // ============ Додаємо слухача на gallery (галарею в цілому), та виклик SimpleLightbox
-
-
-gallery.addEventListener('click', openModal);
+refGallery.addEventListener('click', openModal);//Додаємо слухача на gallery (галарею в цілому), та виклик SimpleLightbox
 
 
 function openModal(event) {
-    event.preventDefault();
+    event.preventDefault();//не даємо відкриватися імг-шці за замовченням
 }
 
+// ініціалізуємо SimpleLightbox
 let lightbox = new SimpleLightbox('.gallery a', {
     // close: false,
     // showCounter: false,
