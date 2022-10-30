@@ -16,6 +16,7 @@ const galleryCards = galleryItems.map(({description, original, preview}) =>
 .join("");
 
 
+
 const refGallery = document.querySelector('div.gallery')// шукаємо дів-ку галереї
 // console.log(refGallery);
 
